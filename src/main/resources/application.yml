@@ -1,0 +1,8 @@
+# application.yml
+spring:
+  profiles:
+    active: dev
+  application:
+    name: order-api
+  main:
+    log-level: INFO
