@@ -33,7 +33,7 @@ public class ErrorHandlerAdvice {
                         .message(item.getMessage())
                         .build())
                 .findFirst();
-        return responseVO.map(this::buildErrorWrapper).orElseGet(() -> buildErrorWrapper(buildInternalServerError()));
+        return responseVO.map(this::buildErrorWrapper).orElseThrow(RuntimeException::new);
     }
 
     @ExceptionHandler(FeignException.class)
@@ -54,17 +54,13 @@ public class ErrorHandlerAdvice {
                         .message(item.getDefaultMessage())
                         .build())
                 .findFirst();
-        return responseVO.map(this::buildErrorWrapper).orElseGet(() -> buildErrorWrapper(buildInternalServerError()));
+        return responseVO.map(this::buildErrorWrapper).orElseThrow(RuntimeException::new);
     }
 
     private ResponseEntity<ErrorResponseVO> buildErrorWrapper(ErrorResponseVO errorResponseVO) {
         return ResponseEntity
                 .status(errorResponseVO.status())
                 .body(errorResponseVO);
-    }
-
-    private static ErrorResponseVO buildInternalServerError() {
-        return new ErrorResponseVO(HttpStatus.INTERNAL_SERVER_ERROR, LocalDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
     }
 
 }
