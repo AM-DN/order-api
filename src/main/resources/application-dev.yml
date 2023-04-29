@@ -1,16 +1,16 @@
 spring:
-  jpa:
-    open-in-view: false
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
   datasource:
     url: jdbc:postgresql://localhost:5432/order_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
     platform: postgres
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+          productApi:
+            url: http://localhost:8081/v1/product

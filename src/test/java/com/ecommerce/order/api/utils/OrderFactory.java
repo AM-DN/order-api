@@ -5,6 +5,7 @@ import com.ecommerce.order.api.application.dto.create.CreateOrderResponse;
 import com.ecommerce.order.api.domain.entity.Order;
 import com.ecommerce.order.api.domain.entity.enums.OrderStatus;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public final class OrderFactory {
@@ -26,6 +27,7 @@ public final class OrderFactory {
                 .productId(null)
                 .orderStatus(OrderStatus.PENDING)
                 .quantity(4)
+                .price(BigDecimal.TEN)
                 .build();
     }
 

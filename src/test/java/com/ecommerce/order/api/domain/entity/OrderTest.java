@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 public class OrderTest {
@@ -23,7 +24,23 @@ public class OrderTest {
     @Test
     public void testWithProductIdNull() {
         Set<ConstraintViolation<Order>> constraintViolations = validator.validate(OrderFactory.createOrderWithProductIdNull());
-        Assertions.assertEquals(1, constraintViolations.size());
+        Assertions.assertEquals(2, constraintViolations.size());
+    }
+
+    @Test
+    public void testCalculateTotalOrder() {
+        Order order = OrderFactory.createOrder();
+        order.initializeOrder(new BigDecimal("10.34"));
+        Assertions.assertEquals(new BigDecimal("41.36"), order.getTotalOrder());
+
+        order.initializeOrder(new BigDecimal("11.113212312"));
+        Assertions.assertEquals(new BigDecimal("44.45"), order.getTotalOrder());
+
+        order.initializeOrder(new BigDecimal("10.444444"));
+        Assertions.assertEquals(new BigDecimal("41.78"), order.getTotalOrder());
+
+        order.initializeOrder(new BigDecimal("10.111111"));
+        Assertions.assertEquals(new BigDecimal("40.44"), order.getTotalOrder());
     }
 
 }
