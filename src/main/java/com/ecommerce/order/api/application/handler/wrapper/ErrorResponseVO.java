@@ -1,9 +1,21 @@
 package com.ecommerce.order.api.application.handler.wrapper;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
+import org.springframework.http.HttpStatus;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public record ErrorResponseVO(String message) {
+import java.time.LocalDateTime;
 
+@Builder
+public record ErrorResponseVO(
+
+        HttpStatus status,
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+        LocalDateTime timeStamp,
+
+        String message
+
+) {
 }

@@ -1,7 +1,7 @@
-package com.ecommerce.order.api.infra.repository;
+package com.ecommerce.order.api.infra.repository.impl;
 
 import com.ecommerce.order.api.domain.entity.Order;
-import com.ecommerce.order.api.infra.repository.impl.OrderDataProviderImpl;
+import com.ecommerce.order.api.infra.repository.OrderRepository;
 import com.ecommerce.order.api.utils.OrderFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
